@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using doWhileLoops.Services.Storage;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace doWhileLoops.API.Controllers
 {
@@ -12,9 +14,11 @@ namespace doWhileLoops.API.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<ExternalAPIEntry>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            TableClient client = new TableClient();
+            var entries = await client.CreateAndRetrieveAllEntries("DoWhileLoopsAPIData");
+            return entries;
         }
 
         // GET api/values/5
@@ -24,11 +28,16 @@ namespace doWhileLoops.API.Controllers
             return "value";
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/values
+        //[HttpPost]
+        //public async Task<void> Post([FromBody] string value)
+        //{
+        //    //TableClient client = new TableClient();
+        //    //CloudTable table = client.CreateTableAsync("DoWhileLoopsAPIData");
+        //    //ExternalAPIEntry entry = new ExternalAPIEntry("youtube", "https://youtube.com");
+        //    //entry.ShortDescription = "myThing";
+        //    //client.InsertOrMergeEntityAsync(entry);
+        //}
 
         // PUT api/values/5
         [HttpPut("{id}")]
