@@ -30,12 +30,5 @@ namespace doWhileLoops.Services.Storage
         {
             return tableWorker.RetrieveSpecificPartition(partitionKey);
         }
-        
-        //TODO
-        //WebJob Method
-
-        //GetAndPushContent
-
-
     }
 }
