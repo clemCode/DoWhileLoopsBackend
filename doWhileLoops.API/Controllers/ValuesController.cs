@@ -12,12 +12,15 @@ namespace doWhileLoops.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        TableClient client = new TableClient();
+
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExternalAPIEntry>>> Get()
+        public ActionResult<List<ExternalAPIEntry>> Get()
         {
-            TableClient client = new TableClient();
-            var entries = await client.CreateAndRetrieveAllEntries("DoWhileLoopsAPIData");
+            var entries = client.GetAllRows();
+            var partitionEntries = client.GetAllEntriesInPartition("myPart1");
+            var specificEntries = client.GetSpecificRow("myPart2", "myRow1");
             return entries;
         }
 
