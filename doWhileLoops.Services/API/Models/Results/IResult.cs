@@ -6,6 +6,6 @@ namespace doWhileLoops.Services.API.Models
 {
     public interface IResult
     {
-        string Message { get; set; }
+        
     }
 }

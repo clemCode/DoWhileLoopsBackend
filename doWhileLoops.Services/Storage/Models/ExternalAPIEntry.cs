@@ -11,15 +11,15 @@ namespace doWhileLoops.Services.Storage
         {
         }
 
-        public ExternalAPIEntry(string source, string url)
+        public ExternalAPIEntry(string source, string slug)
         {
             PartitionKey = source;
-            RowKey = url;
+            RowKey = slug;
         }
 
-        public string Slug { get; set; }
-        public string ShortDescription { get; set; }
         public string Title { get; set; }
+        public string ShortDescription { get; set; }
+        public string URL { get; set; }
         public string UID { get; set; }
     }
 }

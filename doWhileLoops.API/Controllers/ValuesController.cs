@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using doWhileLoops.Services.Storage;
 using Microsoft.Azure.Cosmos.Table;
+using doWhileLoops.Services.API;
 
 namespace doWhileLoops.API.Controllers
 {
@@ -19,9 +20,15 @@ namespace doWhileLoops.API.Controllers
         public ActionResult<List<ExternalAPIEntry>> Get()
         {
             var entries = client.GetAllRows();
-            var partitionEntries = client.GetAllEntriesInPartition("myPart1");
-            var specificEntries = client.GetSpecificRow("myPart2", "myRow1");
+            var partitionEntries = client.GetAllEntriesInPartition("SoundCloud");
+            var specificEntries = client.GetSpecificRow("SoundCloud", "roosterchronicles");
             return entries;
+
+            //APIPublicClient publicClient = new APIPublicClient();
+            //publicClient.CallSourcesAndPopulateStorage();
+
+            //return null;
+
         }
 
         // GET api/values/5

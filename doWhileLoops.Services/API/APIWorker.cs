@@ -1,4 +1,5 @@
-﻿using doWhileLoops.Services.Storage;
+﻿using doWhileLoops.Services.API.Models;
+using doWhileLoops.Services.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,9 +18,11 @@ namespace doWhileLoops.Services.API
         public bool CallSourcesAndPopulateStorage()
         {
             //call external methods here
-
-            //need tableClient to populate storage
-
+            
+            //testing code - for now
+            SoundCloudClient soundCloudClient = new SoundCloudClient();
+            soundCloudClient.GetDataAndWriteResult();
+            
             return true;
         }
     }

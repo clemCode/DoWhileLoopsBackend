@@ -30,5 +30,10 @@ namespace doWhileLoops.Services.Storage
         {
             return tableWorker.RetrieveSpecificPartition(partitionKey);
         }
+
+        public void WriteEntry(ExternalAPIEntry entry)
+        {
+            tableWorker.WriteEntry(entry);
+        }
     }
 }

@@ -64,24 +64,16 @@ namespace doWhileLoops.Services.Storage
         
         #region Worker Methods
 
-        public async Task<ExternalAPIEntry> InsertOrMergeEntityAsync(CloudTable table, ExternalAPIEntry entity)
+        private void InsertOrMergeEntity(ExternalAPIEntry entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
             try
             {
                 TableOperation insertOrMergeOperation = TableOperation.InsertOrMerge(entity);
-
-                TableResult result = await table.ExecuteAsync(insertOrMergeOperation);
-                ExternalAPIEntry apiRow = result.Result as ExternalAPIEntry;
-
-                return apiRow;
+                TableResult result = cloudTable.Execute(insertOrMergeOperation);
             }
             catch (Exception ex)
             {
-                return null;
+                
             }
         }
 
@@ -163,6 +155,11 @@ namespace doWhileLoops.Services.Storage
         {
             ExternalAPIEntry entry = RetrieveSpecificEntity(partitionKey, rowKey);
             return entry;
+        }
+
+        public void WriteEntry(ExternalAPIEntry entity)
+        {
+            InsertOrMergeEntity(entity);
         }
 
         #endregion
