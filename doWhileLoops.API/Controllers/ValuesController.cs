@@ -19,15 +19,15 @@ namespace doWhileLoops.API.Controllers
         [HttpGet]
         public ActionResult<List<ExternalAPIEntry>> Get()
         {
-            var entries = client.GetAllRows();
-            var partitionEntries = client.GetAllEntriesInPartition("SoundCloud");
-            var specificEntries = client.GetSpecificRow("SoundCloud", "roosterchronicles");
-            return entries;
+            //var entries = client.GetAllRows();
+            //var partitionEntries = client.GetAllEntriesInPartition("SoundCloud");
+            //var specificEntries = client.GetSpecificRow("SoundCloud", "roosterchronicles");
+            //return entries;
 
-            //APIPublicClient publicClient = new APIPublicClient();
-            //publicClient.CallSourcesAndPopulateStorage();
+            APIPublicClient publicClient = new APIPublicClient();
+            publicClient.CallSourcesAndPopulateStorage();
 
-            //return null;
+            return new JsonResult("success.");
 
         }
 

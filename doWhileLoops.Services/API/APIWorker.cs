@@ -22,6 +22,10 @@ namespace doWhileLoops.Services.API
             //testing code - for now
             SoundCloudClient soundCloudClient = new SoundCloudClient();
             soundCloudClient.GetDataAndWriteResult();
+
+            GitHubClient gitHubClient = new GitHubClient();
+            gitHubClient.GetDataAndWriteResult();
+            
             
             return true;
         }
