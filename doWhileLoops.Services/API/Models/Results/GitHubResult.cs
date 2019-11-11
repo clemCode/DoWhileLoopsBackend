@@ -20,6 +20,7 @@ namespace doWhileLoops.Services.API.Models
         public Class1[] Property1 { get; set; }
     }
 
+    #region PastedJson
     public class Repo
     {
         public int id { get; set; }
@@ -127,7 +128,5 @@ namespace doWhileLoops.Services.API.Models
         public string url { get; set; }
         public string node_id { get; set; }
     }
-
-
-
+    #endregion
 }

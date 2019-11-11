@@ -11,6 +11,7 @@ namespace doWhileLoops.Services.API.Models
         public object query_urn { get; set; }
     }
 
+    #region PastedJson
     public class Collection
     {
         public int comment_count { get; set; }
@@ -105,4 +106,5 @@ namespace doWhileLoops.Services.API.Models
         public string city { get; set; }
         public string country_code { get; set; }
     }
+    #endregion
 }

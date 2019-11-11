@@ -25,8 +25,10 @@ namespace doWhileLoops.Services.API
 
             GitHubClient gitHubClient = new GitHubClient();
             gitHubClient.GetDataAndWriteResult();
-            
-            
+
+            StoryblokClient storyblockClient = new StoryblokClient();
+            storyblockClient.GetDataAndWriteResult();
+
             return true;
         }
     }
