@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace doWhileLoops.Services.API
 {
@@ -13,9 +14,9 @@ namespace doWhileLoops.Services.API
             this.apiWorker = new APIWorker();
         }
 
-        public bool CallSourcesAndPopulateStorage()
+        public async Task<bool> CallSourcesAndPopulateStorage()
         {
-            bool result = apiWorker.CallSourcesAndPopulateStorage();
+            bool result = await apiWorker.CallSourcesAndPopulateStorage();
             
             return result;
         }

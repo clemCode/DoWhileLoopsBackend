@@ -16,10 +16,12 @@ namespace doWhileLoops.API.Controllers
         
         // GET api/values
         [HttpGet]
-        public ActionResult<List<ExternalAPIEntry>> Get()
+        public async Task<ActionResult<List<ExternalAPIEntry>>> Get()
         {
-            return new JsonResult("success.");
-
+            //var worker = new APIPublicClient();
+            //bool success = await worker.CallSourcesAndPopulateStorage();
+            //return new JsonResult(success.ToString());
+            return new JsonResult("value");
         }
 
         // GET api/values/5

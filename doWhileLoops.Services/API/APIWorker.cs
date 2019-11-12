@@ -3,6 +3,7 @@ using doWhileLoops.Services.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace doWhileLoops.Services.API
 {
@@ -15,21 +16,26 @@ namespace doWhileLoops.Services.API
             this.tableClient = new TableClient();
         }
 
-        public bool CallSourcesAndPopulateStorage()
+        public async Task<bool> CallSourcesAndPopulateStorage()
         {
-            //call external methods here
-            
-            //testing code - for now
-            SoundCloudClient soundCloudClient = new SoundCloudClient();
-            soundCloudClient.GetDataAndWriteResult();
+            try
+            {
+                SoundCloudClient soundCloudClient = new SoundCloudClient();
+                await soundCloudClient.GetDataAndWriteResult();
 
-            GitHubClient gitHubClient = new GitHubClient();
-            gitHubClient.GetDataAndWriteResult();
+                GitHubClient gitHubClient = new GitHubClient();
+                await gitHubClient.GetDataAndWriteResult();
 
-            StoryblokClient storyblockClient = new StoryblokClient();
-            storyblockClient.GetDataAndWriteResult();
+                StoryblokClient storyblockClient = new StoryblokClient();
+                await storyblockClient.GetDataAndWriteResult();
+                
+                return true;
 
-            return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
