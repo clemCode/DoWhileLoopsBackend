@@ -13,20 +13,11 @@ namespace doWhileLoops.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        TableClient client = new TableClient();
-
+        
         // GET api/values
         [HttpGet]
         public ActionResult<List<ExternalAPIEntry>> Get()
         {
-            //var entries = client.GetAllRows();
-            //var partitionEntries = client.GetAllEntriesInPartition("SoundCloud");
-            //var specificEntries = client.GetSpecificRow("SoundCloud", "roosterchronicles");
-            //return entries;
-
-            APIPublicClient publicClient = new APIPublicClient();
-            publicClient.CallSourcesAndPopulateStorage();
-
             return new JsonResult("success.");
 
         }
@@ -38,16 +29,11 @@ namespace doWhileLoops.API.Controllers
             return "value";
         }
 
-        //// POST api/values
-        //[HttpPost]
-        //public async Task<void> Post([FromBody] string value)
-        //{
-        //    //TableClient client = new TableClient();
-        //    //CloudTable table = client.CreateTableAsync("DoWhileLoopsAPIData");
-        //    //ExternalAPIEntry entry = new ExternalAPIEntry("youtube", "https://youtube.com");
-        //    //entry.ShortDescription = "myThing";
-        //    //client.InsertOrMergeEntityAsync(entry);
-        //}
+        // POST api/values
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
 
         // PUT api/values/5
         [HttpPut("{id}")]
