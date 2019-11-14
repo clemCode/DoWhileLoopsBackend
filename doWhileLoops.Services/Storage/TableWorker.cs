@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace doWhileLoops.Services.Storage
 {
     internal class TableWorker
     {
         private CloudTable cloudTable = null;
-        private string storageConnectionString = AppSettings.LoadAppSettings().StorageConnectionString;
-
+        
         public TableWorker()
         {
             InitializeCloudTable();
@@ -42,7 +42,7 @@ namespace doWhileLoops.Services.Storage
 
         private CloudTable CreateTableAsync()
         {
-            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(this.storageConnectionString);
+            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(ConfigurationManager.AppSettings["StorageConnectionString"]);
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient(new TableClientConfiguration());
 
