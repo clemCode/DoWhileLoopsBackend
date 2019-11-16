@@ -2,6 +2,7 @@
 using doWhileLoops.Services.Storage;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,8 @@ namespace doWhileLoops.Services.API
 
         public APIWorker()
         {
-            this.tableClient = new TableClient();
+            //TODO - connString here
+            this.tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
         }
 
         public async Task<bool> CallSourcesAndPopulateStorage()

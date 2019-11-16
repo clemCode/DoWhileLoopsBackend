@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -19,7 +20,7 @@ namespace doWhileLoops.Services.API.Models
 
         public SoundCloudClient()
         {
-            tableClient = new TableClient();
+            tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
 
             httpClient = new HttpClient();
             baseAddress = "https://api-v2.soundcloud.com/users/590946879/tracks?client_id=sxSTSKZlWZJb9ZKPkzhoADyLprTpicol";

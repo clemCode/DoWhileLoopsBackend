@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using doWhileLoops.Services.Storage;
 using Microsoft.Azure.Cosmos.Table;
 using doWhileLoops.Services.API;
+using Microsoft.Extensions.Options;
 
 namespace doWhileLoops.API.Controllers
 {
@@ -13,8 +14,14 @@ namespace doWhileLoops.API.Controllers
     [ApiController]
     public class ContentController : ControllerBase
     {
-        TableClient client = new TableClient();
-       
+        TableClient client = null;
+
+        public ContentController(IOptions<MyOptions> optionsAccessor)
+        {
+            var connString = optionsAccessor.Value.ConnString;
+            client = new TableClient(connString);
+        }
+        
         [HttpGet]        
         public ActionResult<List<ExternalAPIEntry>> Get()
         {

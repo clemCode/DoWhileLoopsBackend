@@ -11,9 +11,9 @@ namespace doWhileLoops.Services.Storage
     {
         private TableWorker tableWorker;
 
-        public TableClient()
+        public TableClient(string connectionString)
         {
-            tableWorker = new TableWorker();
+            tableWorker = new TableWorker(connectionString);
         }
         
         public List<ExternalAPIEntry> GetAllRows()

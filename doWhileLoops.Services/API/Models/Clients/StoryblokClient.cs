@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,7 +19,7 @@ namespace doWhileLoops.Services.API.Models
 
         public StoryblokClient()
         {
-            tableClient = new TableClient();
+            tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
 
             httpClient = new HttpClient();
             baseAddress = "https://api.storyblok.com/v1/cdn/stories?token=VF26nXY079vJIug3cgsrwwtt";

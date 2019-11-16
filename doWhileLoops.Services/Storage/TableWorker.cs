@@ -12,37 +12,21 @@ namespace doWhileLoops.Services.Storage
     {
         private CloudTable cloudTable = null;
         
-        public TableWorker()
+        public TableWorker(string connectionString)
         {
-            InitializeCloudTable();
+            InitializeCloudTable(connectionString);
         }
 
         #region Initialization
 
-        private void InitializeCloudTable()
+        private void InitializeCloudTable(string connectionString)
         {
-            this.cloudTable = CreateTableAsync();
-        }
-        
-        private CloudStorageAccount CreateStorageAccountFromConnectionString(string storageConnectionString)
-        {
-            CloudStorageAccount storageAccount;
-            try
-            {
-                storageAccount = CloudStorageAccount.Parse(storageConnectionString);
-            }
-            catch (Exception ex)
-            {
-                //todo: logging
-                return null;
-            }
-
-            return storageAccount;
+            this.cloudTable = CreateTableAsync(connectionString);
         }
 
-        private CloudTable CreateTableAsync()
+        private CloudTable CreateTableAsync(string connectionString)
         {
-            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(ConfigurationManager.AppSettings["StorageConnectionString"]);
+            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(connectionString);
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient(new TableClientConfiguration());
 
@@ -60,6 +44,22 @@ namespace doWhileLoops.Services.Storage
             }
         }
 
+        private CloudStorageAccount CreateStorageAccountFromConnectionString(string storageConnectionString)
+        {
+            CloudStorageAccount storageAccount;
+            try
+            {
+                storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+            }
+            catch (Exception ex)
+            {
+                //todo: logging
+                return null;
+            }
+
+            return storageAccount;
+        }
+        
         #endregion
         
         #region Worker Methods
