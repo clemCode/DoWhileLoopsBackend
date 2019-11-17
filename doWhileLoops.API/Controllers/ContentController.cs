@@ -16,6 +16,7 @@ namespace doWhileLoops.API.Controllers
     {
         TableClient client = null;
 
+
         public ContentController(IOptions<MyOptions> optionsAccessor)
         {
             var connString = optionsAccessor.Value.ConnString;
@@ -23,19 +24,19 @@ namespace doWhileLoops.API.Controllers
         }
         
         [HttpGet]        
-        public ActionResult<List<ExternalAPIEntry>> Get()
+        public ActionResult<List<ExternalAPIDTO>> Get()
         {
             return client.GetAllRows();
         }
         
         [HttpGet("{partitionKey}")]
-        public ActionResult<List<ExternalAPIEntry>> GetPartition(string partitionKey)
+        public ActionResult<List<ExternalAPIDTO>> GetPartition(string partitionKey)
         {
             return client.GetAllEntriesInPartition(partitionKey);
         }
 
         [HttpGet("{partitionKey}/{rowkey}")]
-        public ActionResult<ExternalAPIEntry> Get(string partitionKey, string rowKey)
+        public ActionResult<ExternalAPIDTO> Get(string partitionKey, string rowKey)
         {
             return client.GetSpecificRow(partitionKey, rowKey);
         }

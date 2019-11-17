@@ -16,24 +16,53 @@ namespace doWhileLoops.Services.Storage
             tableWorker = new TableWorker(connectionString);
         }
         
-        public List<ExternalAPIEntry> GetAllRows()
+        public List<ExternalAPIDTO> GetAllRows()
         {
-            return tableWorker.RetrieveAllEntries();
+            List<ExternalAPIEntry> entries = tableWorker.RetrieveAllEntries();
+            if (entries.Count > 0)
+                return ConvertEntriesToDTO(entries);
+            else
+                return null;
         }
 
-        public ExternalAPIEntry GetSpecificRow(string partitionKey, string rowKey)
+        public ExternalAPIDTO GetSpecificRow(string partitionKey, string rowKey)
         {
-            return tableWorker.RetrieveSpecificEntry(partitionKey, rowKey);
+            ExternalAPIEntry entry = tableWorker.RetrieveSpecificEntry(partitionKey, rowKey);
+            if (entry != null)
+                return ConvertEntryToDTO(entry);
+            else
+                return null;
         }
 
-        public List<ExternalAPIEntry> GetAllEntriesInPartition(string partitionKey)
+        public List<ExternalAPIDTO> GetAllEntriesInPartition(string partitionKey)
         {
-            return tableWorker.RetrieveSpecificPartition(partitionKey);
+            List<ExternalAPIEntry> entries = tableWorker.RetrieveSpecificPartition(partitionKey);
+            if (entries.Count > 0)
+                return ConvertEntriesToDTO(entries);
+            else
+                return null;
         }
 
         public void WriteEntry(ExternalAPIEntry entry)
         {
             tableWorker.WriteEntry(entry);
+        }
+
+        private ExternalAPIDTO ConvertEntryToDTO(ExternalAPIEntry entry)
+        {
+            return new ExternalAPIDTO(entry);
+        }
+
+        private List<ExternalAPIDTO> ConvertEntriesToDTO(List<ExternalAPIEntry> entries)
+        {
+            List<ExternalAPIDTO> dtos = new List<ExternalAPIDTO>();
+
+            foreach(ExternalAPIEntry entry in entries)
+            {
+                ExternalAPIDTO dto = new ExternalAPIDTO(entry);
+                dtos.Add(dto);
+            }
+            return dtos;
         }
     }
 }
