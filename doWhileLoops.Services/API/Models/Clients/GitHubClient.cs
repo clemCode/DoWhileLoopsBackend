@@ -17,9 +17,9 @@ namespace doWhileLoops.Services.API.Models
         public HttpClient httpClient { get; set; }
         public string urlParams { get; set; }
 
-        public GitHubClient()
+        public GitHubClient(string connectionString)
         {
-            tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+            tableClient = new TableClient(connectionString);
 
             httpClient = new HttpClient();
             baseAddress = "https://api.github.com/users/clemCode/repos";

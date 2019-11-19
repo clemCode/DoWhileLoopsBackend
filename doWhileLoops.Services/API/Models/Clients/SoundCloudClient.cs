@@ -18,9 +18,9 @@ namespace doWhileLoops.Services.API.Models
         public HttpClient httpClient { get; set; }
         public string urlParams { get; set; }
 
-        public SoundCloudClient()
+        public SoundCloudClient(string connectionString)
         {
-            tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+            tableClient = new TableClient(connectionString);
 
             httpClient = new HttpClient();
             baseAddress = "https://api-v2.soundcloud.com/users/590946879/tracks?client_id=sxSTSKZlWZJb9ZKPkzhoADyLprTpicol";

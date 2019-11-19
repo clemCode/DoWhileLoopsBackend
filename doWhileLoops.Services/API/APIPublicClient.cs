@@ -9,9 +9,9 @@ namespace doWhileLoops.Services.API
     {
         private APIWorker apiWorker = null;
 
-        public APIPublicClient()
+        public APIPublicClient(string connectionString)
         {
-            this.apiWorker = new APIWorker();
+            this.apiWorker = new APIWorker(connectionString);
         }
 
         public async Task<bool> CallSourcesAndPopulateStorage()

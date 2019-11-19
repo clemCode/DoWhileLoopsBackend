@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using doWhileLoops.Services.Storage;
 using Microsoft.Azure.Cosmos.Table;
 using doWhileLoops.Services.API;
+using Microsoft.Extensions.Options;
 
 namespace doWhileLoops.API.Controllers
 {
@@ -13,15 +14,20 @@ namespace doWhileLoops.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        
+        string connString;
+
+        public ValuesController(IOptions<MyOptions> optionsAccessor)
+        {
+            connString = optionsAccessor.Value.ConnString;
+        }
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<List<ExternalAPIEntry>>> Get()
         {
-            //var worker = new APIPublicClient();
-            //bool success = await worker.CallSourcesAndPopulateStorage();
-            //return new JsonResult(success.ToString());
-            return new JsonResult("value");
+            var worker = new APIPublicClient(connString);
+            bool success = await worker.CallSourcesAndPopulateStorage();
+            return new JsonResult(success.ToString());
+            //return new JsonResult("value");
         }
 
         // GET api/values/5

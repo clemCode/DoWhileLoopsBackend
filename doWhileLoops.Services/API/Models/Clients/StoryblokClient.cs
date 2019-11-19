@@ -17,9 +17,9 @@ namespace doWhileLoops.Services.API.Models
         public HttpClient httpClient { get; set; }
         public string urlParams { get; set; }
 
-        public StoryblokClient()
+        public StoryblokClient(string connectionString)
         {
-            tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+            tableClient = new TableClient(connectionString);
 
             httpClient = new HttpClient();
             baseAddress = "https://api.storyblok.com/v1/cdn/stories?token=VF26nXY079vJIug3cgsrwwtt";
@@ -41,8 +41,6 @@ namespace doWhileLoops.Services.API.Models
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                //var repoArrayResult = JsonConvert.DeserializeObject<Repo[]>(result);
-                //StoryblokResult storyblokResult = new StoryblokResult(repoArrayResult);
                 StoryblokResult storyblokResult = JsonConvert.DeserializeObject<StoryblokResult>(result);
                 return storyblokResult;
             }

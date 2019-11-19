@@ -11,24 +11,25 @@ namespace doWhileLoops.Services.API
     internal class APIWorker
     {
         private TableClient tableClient;
+        string connectionString;
 
-        public APIWorker()
+        public APIWorker(string connectionString)
         {
-            //TODO - connString here
-            this.tableClient = new TableClient(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+            this.tableClient = new TableClient(connectionString);
+            this.connectionString = connectionString;
         }
 
         public async Task<bool> CallSourcesAndPopulateStorage()
         {
             try
             {
-                SoundCloudClient soundCloudClient = new SoundCloudClient();
+                SoundCloudClient soundCloudClient = new SoundCloudClient(connectionString);
                 await soundCloudClient.GetDataAndWriteResult();
 
-                GitHubClient gitHubClient = new GitHubClient();
+                GitHubClient gitHubClient = new GitHubClient(connectionString);
                 await gitHubClient.GetDataAndWriteResult();
 
-                StoryblokClient storyblockClient = new StoryblokClient();
+                StoryblokClient storyblockClient = new StoryblokClient(connectionString);
                 await storyblockClient.GetDataAndWriteResult();
                 
                 return true;
