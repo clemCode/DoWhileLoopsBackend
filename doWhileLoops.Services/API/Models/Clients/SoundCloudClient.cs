@@ -23,7 +23,7 @@ namespace doWhileLoops.Services.API.Models
             tableClient = new TableClient(connectionString);
 
             httpClient = new HttpClient();
-            baseAddress = "https://api-v2.soundcloud.com/users/590946879/tracks?client_id=sxSTSKZlWZJb9ZKPkzhoADyLprTpicol";
+            baseAddress = "https://api-v2.soundcloud.com/users/590946879/tracks?client_id=r5ELVSy3RkcjX7ilaL7n2v1Z8irA9SL8";
             
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
