@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using doWhileLoops.Services.API;
 using Microsoft.Azure.WebJobs;
 
 namespace doWhileLoops.ExternalAPIWebJob
 {
     public class Functions
     {
-        // This function will get triggered/executed when a new message is written 
-        // on an Azure Queue called queue.
-        public static void ProcessQueueMessage([QueueTrigger("queue")] string message, TextWriter log)
+        public async static Task ProcessTimerAction([TimerTrigger("0 0 2 * * *", RunOnStartup = true)]TimerInfo timerInfo)
         {
-            log.WriteLine(message);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://dowhileloopsapi.azurewebsites.net/api/refresh");
+
+                var response = await client.GetAsync("");
+
+            }
         }
     }
 }

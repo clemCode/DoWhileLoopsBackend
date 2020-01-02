@@ -13,7 +13,6 @@ namespace doWhileLoops.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize] TODO - implement
     public class RefreshController : ControllerBase
     {
         string connString;

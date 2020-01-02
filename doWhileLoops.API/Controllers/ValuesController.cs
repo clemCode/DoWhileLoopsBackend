@@ -27,7 +27,6 @@ namespace doWhileLoops.API.Controllers
             var worker = new APIPublicClient(connString);
             bool success = await worker.CallSourcesAndPopulateStorage();
             return new JsonResult(success.ToString());
-            //return new JsonResult("value");
         }
 
         // GET api/values/5
