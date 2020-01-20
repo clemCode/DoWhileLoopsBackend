@@ -27,6 +27,7 @@ namespace doWhileLoops.API.Controllers
         public ActionResult<List<ExternalAPIDTO>> Get()
         {
             return client.GetAllRows();
+            //git repo test comment
         }
         
         [HttpGet("{partitionKey}")]
